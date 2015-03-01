@@ -1,0 +1,68 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html" />
+<link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html" />
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
+
+<link rel="import" href="../dribbble-tile/dribbble-tile.html">
+
+<polymer-element name="user-screen">
+   <template>
+       <style>
+           :host{
+               display: block;
+               padding:0px;
+               margin:0px;
+           }
+           
+           paper-button {
+               background: #1976D2;
+               color: #ffffff;
+               width:100%;
+               margin: 20px 0;
+           }
+           paper-spinner {
+               margin: 5px auto;
+               display: block;
+           }
+           .spinnerClass {
+               width: 100%;
+               margin:0;
+           }
+           
+       </style>
+        
+                <div class="spinnerClass">
+                    <paper-spinner id="topspinner" active></paper-spinner>
+                </div>
+                <core-ajax auto
+                    url="{{endPointUrl}}/shots?access_token={{accessToken}}&page={{page}}"
+                    handleAs="json"
+                    on-core-response="{{handleResponse}}"></core-ajax>
+                <template repeat="{{collectionOfImages as data}}">
+                    <dribbble-tile data="{{data}}"></dribbble-tile>
+                </template>
+                <paper-button raised noink on-click={{goToNextPage}}>More</paper-button>
+        
+    </template>
+    <script>
+        Polymer('user-screen', {
+            endPointUrl : "https://api.dribbble.com/v1",
+            accessToken : "PUT_YOUR_CLIENT_TOKEN_HERE",
+            page : 1,
+            collectionOfImages : [],
+            ready: function() {
+                console.log("User-screen is ready");
+            },
+            handleResponse : function(xhr) {
+                this.collectionOfImages = xhr.detail.response;
+                this.$.topspinner.removeAttribute('active');
+            },
+            goToNextPage: function(e) {
+                this.page = this.page + 1;
+                this.$.topspinner.setAttribute('active','active');
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+            }
+        });
+    </script>
+</polymer-element>

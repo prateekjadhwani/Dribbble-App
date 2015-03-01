@@ -1,0 +1,28 @@
+<!-- 
+Element : main-screen
+Descrition : This file will act as the main route file that will push the user to different pages 
+Author : Prateek Jadhwani
+-->
+
+<!-- imports -->
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+<link rel="import" href="../../bower_components/app-router/app-router.html" />
+
+
+<!-- element definition -->
+<polymer-element name="main-screen">
+    <template>
+        <app-router mode="auto|pushstate|hash">
+            <app-route path="/" import="user_components/login-screen/login-screen.html"></app-route>
+            <app-route path="/user/:token" import="user_components/user-screen/user-screen.html"></app-route>
+        </app-router>
+    </template>
+    <script>
+        Polymer('main-screen',{
+            ready : function() {
+                console.log("I am Ready ");
+                location.href = "#/";
+            }
+        });
+    </script>
+</polymer-element>

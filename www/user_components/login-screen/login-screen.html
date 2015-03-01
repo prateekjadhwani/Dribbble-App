@@ -1,0 +1,20 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
+
+<polymer-element name="login-screen">
+    <template>
+        <h1>I am the login screen</h1>
+        <paper-button raised noink on-click={{goToUserScreen}}>raised button</paper-button>
+    </template>
+    <script>
+        Polymer('login-screen', {
+            ready : function () {
+                console.log("hello");
+            },
+            goToUserScreen: function() {
+                var name = "Prateek";
+                location.href = '#/user/' + name;
+            }
+        });
+    </script>
+</polymer-element>

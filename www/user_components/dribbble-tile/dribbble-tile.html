@@ -1,0 +1,69 @@
+
+<link rel="import" href="../../bower_components/core-image/core-image.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
+<link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html" />
+
+<polymer-element name="dribbble-tile" attributes="data">
+    <template>
+        <style>
+            core-image {
+               height: 300px;
+               display: block;
+               margin: 10px;
+           }
+            .author {
+               border-top: 2px solid #ededed;
+               margin:0px;
+               padding: 10px;
+               display: flex;
+           }
+           .leftSideData {
+               width: 50px;
+               flex:1;
+           }
+           .rightSideData {
+               flex:4;
+               margin: 10px;
+           }
+           .rightSideData p {
+               margin:0;
+               word-wrap: break-word;
+           }
+           .avatar {
+               width: 45px;
+               height:45px;
+               border-radius: 45px;
+           }
+           .imageData h3 {
+               text-align: center;
+           }
+        </style>
+        <paper-shadow z="1">
+            <core-image src="{{data.images.normal}}" 
+                sizing="cover" 
+                placeholder="{{data.title}}"></core-image>
+            <div class="imageData">
+                <h3>{{data.title}}</h3>
+                <div class="author">
+                    <div class="leftSideData">
+                        <core-image class="avatar" 
+                            src="{{data.user.avatar_url}}" 
+                            sizing="cover" 
+                            placeholder="{{data.user.name}}"></core-image>
+                    </div>
+                    <div class="rightSideData">
+                        <p>{{data.user.name}}</p>
+                        <p>{{data.user.bio}}</p>
+                    </div>
+                </div>
+            </div>
+        </paper-shadow>
+    </template>
+    <script>
+        Polymer('dribbble-tile', {
+            ready: function() {
+                //do nothing
+            }
+        });
+    </script>
+</polymer-element>
